@@ -1,4 +1,4 @@
-package com.rizzek.randomstarwarscharacter.presentation.viewmodel
+package com.rizzek.randomstarwarscharacter.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rizzek.randomstarwarscharacter.domain.entity.StarWarsCharacter
-import com.rizzek.randomstarwarscharacter.presentation.RandomCharacterUiState
+import com.rizzek.randomstarwarscharacter.presentation.viewmodel.RandomCharacterViewModel
 
 @Composable
 fun RandomCharacterScreen() {
@@ -69,22 +69,14 @@ private fun RandomCharacterScreenContent(
             }
 
             randomCharacterUiState.character?.let { character ->
-                CharacterCard(character = character)
+                CharacterCard(character = character, modifier = Modifier.padding(16.dp))
             }
 
         }
     }
 }
 
-@Composable
-fun CharacterCard(character: StarWarsCharacter) {
-    Card {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Text(character.name)
-        }
 
-    }
-}
 
 // --------------- Previews ---------------
 

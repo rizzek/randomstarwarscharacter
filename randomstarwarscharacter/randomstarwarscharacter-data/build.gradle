@@ -7,11 +7,11 @@ plugins {
 
 android {
     namespace 'com.rizzek.randomstarwarscharacter.data'
-    compileSdk 34
+    compileSdk 33
 
     defaultConfig {
         minSdk 29
-        targetSdk 34
+        targetSdk 33
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -30,6 +30,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+}
+
+kapt {
+    correctErrorTypes true
 }
 
 dependencies {

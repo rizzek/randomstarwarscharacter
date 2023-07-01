@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/randomstarwarscharacter" />
             <option value="$PROJECT_DIR$/randomstarwarscharacter/randomstarwarscharacter-data" />
             <option value="$PROJECT_DIR$/randomstarwarscharacter/randomstarwarscharacter-domain" />
+            <option value="$PROJECT_DIR$/randomstarwarscharacter/randomstarwarscharacter-presentation" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace 'com.rizzek.randomstarwarscharacter'
-    compileSdk 34
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.rizzek.randomstarwarscharacter"
         minSdk 29
-        targetSdk 34
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -39,7 +39,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.3.2'
+        kotlinCompilerExtensionVersion '1.4.8'
     }
     packagingOptions {
         resources {
