@@ -1,5 +1,6 @@
-package com.rizzek.randomstarwarscharacter.presentation
+package com.rizzek.randomstarwarscharacter.presentation.screens
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -8,24 +9,26 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rizzek.randomstarwarscharacter.domain.entity.StarWarsCharacter
+import com.rizzek.randomstarwarscharacter.presentation.R
 
 @Composable
 fun CharacterCard(character: StarWarsCharacter, modifier: Modifier = Modifier) {
     Card(modifier = modifier) {
         Column(modifier = Modifier.padding(16.dp)) {
-            val fields = listOf<Pair<String, String>>(
-                "Name" to character.name,
-                "Height" to character.height.toString(),
-                "Mass" to character.mass.toString(),
-                "Hair Color" to character.hairColor,
-                "Skin Color" to character.skinColor,
-                "Eye Color" to character.eyeColor,
-                "Birth Year" to character.birthYear,
-                "Gender" to character.gender
+            val fields = listOf(
+                stringResource(id = R.string.name_label) to character.name,
+                stringResource(id = R.string.height_label) to character.height.toString(),
+                stringResource(id = R.string.mass_label) to character.mass.toString(),
+                stringResource(id = R.string.hair_color_label) to character.hairColor,
+                stringResource(id = R.string.skin_color_label) to character.skinColor,
+                stringResource(id = R.string.eye_color_label) to character.eyeColor,
+                stringResource(id = R.string.birth_year_label) to character.birthYear,
+                stringResource(id = R.string.gender_label) to character.gender
             )
 
             for ((index, field) in fields.withIndex()) {
@@ -49,6 +52,7 @@ private fun DataRow(label: String, value: String) {
 }
 
 @Preview
+@Preview(locale = "de")
 @Composable
 fun CharacterCardPreview() {
     CharacterCard(

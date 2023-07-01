@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="random_character_title">Random Star Wars Character</string>
+    <string name="random_character_button">Fetch a random character</string>
+    <string name="name_label">Name</string>
+    <string name="height_label">Height</string>
+    <string name="mass_label">Mass</string>
+    <string name="hair_color_label">Hair Color</string>
+    <string name="skin_color_label">Skin Color</string>
+    <string name="eye_color_label">Eye Color</string>
+    <string name="birth_year_label">Birth Year</string>
+    <string name="gender_label">Gender</string>
+    <string name="error_label">Error while fetching character. Please try again.</string>
+</resources>

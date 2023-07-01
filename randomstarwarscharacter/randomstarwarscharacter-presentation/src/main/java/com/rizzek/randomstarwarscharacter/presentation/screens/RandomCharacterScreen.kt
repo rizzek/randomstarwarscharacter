@@ -1,11 +1,10 @@
-package com.rizzek.randomstarwarscharacter.presentation
+package com.rizzek.randomstarwarscharacter.presentation.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -16,11 +15,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rizzek.randomstarwarscharacter.domain.entity.StarWarsCharacter
+import com.rizzek.randomstarwarscharacter.presentation.R
 import com.rizzek.randomstarwarscharacter.presentation.viewmodel.RandomCharacterViewModel
 
 @Composable
@@ -38,30 +39,29 @@ private fun RandomCharacterScreenContent(
     randomCharacterUiState: RandomCharacterUiState,
     onFetchCharacterClicked: () -> Unit
 ) {
-    Scaffold {
+    Scaffold { padding ->
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(it)
+                .padding(padding)
         ) {
             Text(
-                text = "Random Star Wars Character",
+                text = stringResource(id = R.string.random_character_title),
                 style = MaterialTheme.typography.headlineLarge,
                 textAlign = TextAlign.Center
             )
             Button(onClick = onFetchCharacterClicked) {
-                Text(text = "Fetch a random character")
+                Text(text = stringResource(id = R.string.random_character_button))
             }
 
-            randomCharacterUiState.errorMessage?.let { errorMessage ->
+            if (randomCharacterUiState.isError) {
                 Text(
-                    text = errorMessage,
+                    text = stringResource(id = R.string.error_label),
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.Red
                 )
-
             }
 
             if (randomCharacterUiState.isLoading) {
@@ -83,6 +83,7 @@ private fun RandomCharacterScreenContent(
 
 // You could also add another preview for dark mode, other language settings, screen sizes, ...
 @Preview
+@Preview(locale = "de")
 @Composable
 fun RandomCharacterScreenContentPreview() {
     RandomCharacterScreenContent(
@@ -98,33 +99,35 @@ fun RandomCharacterScreenContentPreview() {
                 "19BBY",
                 "male"
             ),
-            errorMessage = null
+            isError = false
         ),
         onFetchCharacterClicked = {}
     )
 }
 
 @Preview
+@Preview(locale = "de")
 @Composable
 fun RandomCharacterScreenContentLoadingPreview() {
     RandomCharacterScreenContent(
         randomCharacterUiState = RandomCharacterUiState(
             isLoading = true,
             character = null,
-            errorMessage = null
+            isError = false
         ),
         onFetchCharacterClicked = {}
     )
 }
 
 @Preview
+@Preview(locale = "de")
 @Composable
 fun RandomCharacterScreenContentErrorPreview() {
     RandomCharacterScreenContent(
         randomCharacterUiState = RandomCharacterUiState(
             isLoading = false,
             character = null,
-            errorMessage = "Error while fetching character"
+            isError = true
         ),
         onFetchCharacterClicked = {}
     )

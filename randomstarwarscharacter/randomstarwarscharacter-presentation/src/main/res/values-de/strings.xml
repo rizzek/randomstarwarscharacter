@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="random_character_title">Zufälliger Star-Wars-Charakter</string>
+    <string name="random_character_button">Zufälligen Charakter laden</string>
+    <string name="name_label">Name</string>
+    <string name="height_label">Größe</string>
+    <string name="mass_label">Masse</string>
+    <string name="hair_color_label">Haarfarbe</string>
+    <string name="skin_color_label">Hautfarbe</string>
+    <string name="eye_color_label">Augenfarbe</string>
+    <string name="birth_year_label">Geburtsjahr</string>
+    <string name="gender_label">Geschlecht</string>
+    <string name="error_label">Fehler beim Holen des Charakters. Bitte nochmal versuchen.</string>
+</resources>

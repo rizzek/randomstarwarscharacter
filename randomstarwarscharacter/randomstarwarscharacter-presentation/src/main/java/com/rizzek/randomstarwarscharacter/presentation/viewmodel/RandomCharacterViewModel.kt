@@ -4,10 +4,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rizzek.randomstarwarscharacter.domain.NetworkResource
-import com.rizzek.randomstarwarscharacter.domain.entity.StarWarsCharacter
-import com.rizzek.randomstarwarscharacter.domain.repository.CharacterRepository
 import com.rizzek.randomstarwarscharacter.domain.usecase.GetRandomCharacter
-import com.rizzek.randomstarwarscharacter.presentation.RandomCharacterUiState
+import com.rizzek.randomstarwarscharacter.presentation.screens.RandomCharacterUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,15 +16,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class RandomCharacterViewModel @Inject constructor(
-    private val getRandomCharacter: GetRandomCharacter,
-    private val characterRepository: CharacterRepository
+    private val getRandomCharacter: GetRandomCharacter
 ) : ViewModel() {
 
-    private val _randomCharacterState = MutableStateFlow<RandomCharacterUiState>(
+    private val _randomCharacterState = MutableStateFlow(
         value = RandomCharacterUiState(
             isLoading = false,
             character = null,
-            errorMessage = null
+            isError = false
         )
     )
 
@@ -42,11 +39,11 @@ internal class RandomCharacterViewModel @Inject constructor(
                 val randomCharacter = getRandomCharacter()
                 if (randomCharacter is NetworkResource.Success) {
                     _randomCharacterState.update {
-                        it.copy(isLoading = false, character = randomCharacter.data, errorMessage = null)
+                        it.copy(isLoading = false, character = randomCharacter.data, isError = false)
                     }
                 } else {
                     _randomCharacterState.update {
-                        it.copy(isLoading = false, errorMessage = "Error fetching character.")
+                        it.copy(isLoading = false, isError = true)
                     }
                 }
 
@@ -54,7 +51,7 @@ internal class RandomCharacterViewModel @Inject constructor(
                 Log.e("RandomCharacterViewModel", "Error fetching character", e)
                 _randomCharacterState.update {
                     // Some more sophisticated error handling could be done here, e.g. mapping the exception to a string resource or something
-                    it.copy(isLoading = false, errorMessage = "Error fetching character")
+                    it.copy(isLoading = false, isError = true)
                 }
             }
         }
