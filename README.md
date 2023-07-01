@@ -18,3 +18,4 @@ Next possible steps would be:
 * Add details about the character (e.g. homeworld, species, etc.)
 * Cache the data (e.g. using Room) to avoid unnecessary network requests
 * Polish the UI
+* * Proper error handling for the different failure cases instead of generic "an error occurred" message.
