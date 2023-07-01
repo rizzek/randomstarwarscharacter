@@ -1,8 +1,11 @@
 package com.rizzek.randomstarwarscharacter.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.rizzek.randomstarwarscharacter.domain.NetworkResource
 import com.rizzek.randomstarwarscharacter.domain.entity.StarWarsCharacter
+import com.rizzek.randomstarwarscharacter.domain.repository.CharacterRepository
 import com.rizzek.randomstarwarscharacter.domain.usecase.GetRandomCharacter
 import com.rizzek.randomstarwarscharacter.presentation.RandomCharacterUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class RandomCharacterViewModel @Inject constructor(
-    private val getStarWarsCharacter: GetRandomCharacter
+    private val getRandomCharacter: GetRandomCharacter,
+    private val characterRepository: CharacterRepository
 ) : ViewModel() {
 
     private val _randomCharacterState = MutableStateFlow<RandomCharacterUiState>(
@@ -35,11 +39,19 @@ internal class RandomCharacterViewModel @Inject constructor(
                 it.copy(isLoading = true)
             }
             try {
-                val randomCharacter = getStarWarsCharacter()
-                _randomCharacterState.update {
-                    it.copy(isLoading = false, character = randomCharacter)
+                val randomCharacter = getRandomCharacter()
+                if (randomCharacter is NetworkResource.Success) {
+                    _randomCharacterState.update {
+                        it.copy(isLoading = false, character = randomCharacter.data, errorMessage = null)
+                    }
+                } else {
+                    _randomCharacterState.update {
+                        it.copy(isLoading = false, errorMessage = "Error fetching character.")
+                    }
                 }
+
             } catch (e: Exception) {
+                Log.e("RandomCharacterViewModel", "Error fetching character", e)
                 _randomCharacterState.update {
                     // Some more sophisticated error handling could be done here, e.g. mapping the exception to a string resource or something
                     it.copy(isLoading = false, errorMessage = "Error fetching character")
