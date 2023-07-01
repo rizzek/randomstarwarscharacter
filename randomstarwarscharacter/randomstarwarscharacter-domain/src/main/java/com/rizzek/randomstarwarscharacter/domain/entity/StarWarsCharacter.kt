@@ -6,8 +6,8 @@ package com.rizzek.randomstarwarscharacter.domain.entity
  */
 data class StarWarsCharacter(
     val name: String,
-    val height: Int,
-    val mass: Int,
+    val height: String,
+    val mass: String,
     val hairColor: String,
     val skinColor: String,
     val eyeColor: String,

@@ -22,8 +22,8 @@ fun CharacterCard(character: StarWarsCharacter, modifier: Modifier = Modifier) {
         Column(modifier = Modifier.padding(16.dp)) {
             val fields = listOf(
                 stringResource(id = R.string.name_label) to character.name,
-                stringResource(id = R.string.height_label) to character.height.toString(),
-                stringResource(id = R.string.mass_label) to character.mass.toString(),
+                stringResource(id = R.string.height_label) to character.height,
+                stringResource(id = R.string.mass_label) to character.mass,
                 stringResource(id = R.string.hair_color_label) to character.hairColor,
                 stringResource(id = R.string.skin_color_label) to character.skinColor,
                 stringResource(id = R.string.eye_color_label) to character.eyeColor,
@@ -58,8 +58,8 @@ fun CharacterCardPreview() {
     CharacterCard(
         character = StarWarsCharacter(
             "Luke Skywalker",
-            172,
-            77,
+            "172",
+            "77",
             "blond",
             "fair",
             "blue",

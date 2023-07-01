@@ -91,8 +91,8 @@ fun RandomCharacterScreenContentPreview() {
             isLoading = false,
             character = StarWarsCharacter(
                 "Luke Skywalker",
-                172,
-                77,
+                "172",
+                "77",
                 "blond",
                 "fair",
                 "blue",
